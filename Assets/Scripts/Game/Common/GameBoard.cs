@@ -187,17 +187,22 @@ public class GameBoard : MonoBehaviour
     {
         int IdA = Tiles.FindIndex(x => x == TileA);
         int IdB = Tiles.FindIndex(x => x == TileB);
+        var i = IdA % Width;
+        var j = IdA / Width;
+        var k = IdB % Width;
+        var l = IdB / Width;
+        if (i - k > 1 || j - l > 1 || i - k < -1 || j-l < -1)
+        {
+            OnCompleted();
+            return;
+        }
         GameObject Temp = Tiles[IdA];
         Tiles[IdA] = Tiles[IdB];
         Tiles[IdB] = Temp;
         Tiles[IdA].GetComponent<Tile>().SetGameBoard(this);
         Tiles[IdB].GetComponent<Tile>().SetGameBoard(this);
-        float tileW = 1.5f;
-        float tileH = 1.5f;
-        var i = IdA % Width;
-        var j = IdA / Width;
-        var k = IdB % Width;
-        var l = IdB / Width;
+
+
         AnimationManager.Slide(new List<SlideObject>
                     {
                         new SlideObject{
@@ -205,7 +210,7 @@ public class GameBoard : MonoBehaviour
                             AnimationType = AnimationType.Position,
                             Duration = .2f,
                             StartPosition = Tiles[IdA].gameObject.transform.position,
-                            EndPosition = new Vector3(StartX + i * (tileW), -j * (tileH) + StartY,0),
+                            EndPosition = new Vector3(StartX + i * (TileW), -j * (TileH) + StartY,0),
                             GameObject =  Tiles[IdA].gameObject
                         },
                         new SlideObject{
@@ -213,7 +218,7 @@ public class GameBoard : MonoBehaviour
                             AnimationType = AnimationType.Position,
                             Duration = .2f,
                             StartPosition = Tiles[IdB].gameObject.transform.position,
-                            EndPosition = new Vector3(StartX + k * (tileW), -l * (tileH) + StartY,0),
+                            EndPosition = new Vector3(StartX + k * (TileW), -l * (TileH) + StartY,0),
                             GameObject =  Tiles[IdB].gameObject
                         }
                     }
