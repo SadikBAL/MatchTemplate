@@ -243,6 +243,7 @@ public class GameBoard : MonoBehaviour
                 ExplodeTile(Tile, ExplodeTileList, IsRecursive);
                 foreach(GameObject t in ExplodeTileList)
                 {
+                   
                     List.Add(new SlideObject
                     {
                         EaseType = EaseType.Lerp,
@@ -253,9 +254,9 @@ public class GameBoard : MonoBehaviour
                         GameObject = Tile
                     }
                     );
+                    t.GetComponent<Tile>().ExplodeFx();
                     t.GetComponent<Tile>().Destroyed = true;
                 }
-                
                 
             }
         }

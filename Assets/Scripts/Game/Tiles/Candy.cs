@@ -11,6 +11,12 @@ public class Candy : Tile
     {
         return new List<GameObject> { gameObject };
     }
+
+    public override void ExplodeFx()
+    {
+        this.Board.TilePool.GetCandyFx(Type).gameObject.transform.position = this.gameObject.transform.position;
+    }
+
     public override bool Moveable()
     {
         return true;

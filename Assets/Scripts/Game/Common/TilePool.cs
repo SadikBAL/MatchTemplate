@@ -23,6 +23,18 @@ public class TilePool : MonoBehaviour
     public Dictionary<CollectableType,  PrefabPool> CollectablePools = new Dictionary<CollectableType, PrefabPool>();
     public PrefabPool ColorBombPool = new PrefabPool();
 
+    //Fx
+    public List<CandyPrefabs> CandyListFx = new List<CandyPrefabs>();
+    public List<CandyPrefabs> HorizontalCandyListFx = new List<CandyPrefabs>();
+    public List<CandyPrefabs> VerticalCandyListFx = new List<CandyPrefabs>();
+    public List<CandyPrefabs> WrappedCandyListFx = new List<CandyPrefabs>();
+
+    public Dictionary<CandyType, PrefabPool> CandyPoolsFx = new Dictionary<CandyType, PrefabPool>();
+    public Dictionary<CandyType, PrefabPool> HorizontalCandyPoolsFx = new Dictionary<CandyType, PrefabPool>();
+    public Dictionary<CandyType, PrefabPool> VerticalCandyPoolsFx = new Dictionary<CandyType, PrefabPool>();
+    public Dictionary<CandyType, PrefabPool> WrappedCandyPoolsFx = new Dictionary<CandyType, PrefabPool>();
+    public PrefabPool ColorBombPoolFx = new PrefabPool();
+
     public GameObject GetRandomCandy()
     {
         int Index = UnityEngine.Random.Range(0, System.Enum.GetValues(typeof(CandyType)).Length);
@@ -31,6 +43,10 @@ public class TilePool : MonoBehaviour
     public GameObject GetColorBomb()
     {
         return ColorBombPool.GetObject();
+    }
+    public GameObject GetColorBombFx()
+    {
+        return ColorBombPoolFx.GetObject();
     }
     public GameObject GetStripeCandy(CandyType CandyType,CandyStripeType CandyStripeType)
     {
@@ -43,10 +59,30 @@ public class TilePool : MonoBehaviour
             return VerticalCandyPools[CandyType].GetObject();
         }
     }
+    public GameObject GetStripeCandyFx(CandyType CandyType, CandyStripeType CandyStripeType)
+    {
+        if (CandyStripeType == CandyStripeType.Horizontal)
+        {
+            return HorizontalCandyPoolsFx[CandyType].GetObject();
+        }
+        else
+        {
+            return VerticalCandyPoolsFx[CandyType].GetObject();
+        }
+    }
     public GameObject GetWrappedCandy(CandyType CandyType)
     {
         return WrappedCandyPools[CandyType].GetObject();
     }
+    public GameObject GetWrappedCandyFx(CandyType CandyType)
+    {
+        return WrappedCandyPoolsFx[CandyType].GetObject();
+    }
+    public GameObject GetCandyFx(CandyType CandyType)
+    {
+        return CandyPoolsFx[CandyType].GetObject();
+    }
+
     void Awake()
     {
         foreach (CandyPrefabs Item in CandyList)
@@ -72,6 +108,22 @@ public class TilePool : MonoBehaviour
         foreach (CollectablePrefabs Item in CollectableList)
         {
             CollectablePools.Add(Item.Key, Item.Value);
+        }
+        foreach (CandyPrefabs Item in CandyListFx)
+        {
+            CandyPoolsFx.Add(Item.Key, Item.Value);
+        }
+        foreach (CandyPrefabs Item in HorizontalCandyListFx)
+        {
+            HorizontalCandyPoolsFx.Add(Item.Key, Item.Value);
+        }
+        foreach (CandyPrefabs Item in VerticalCandyListFx)
+        {
+            VerticalCandyPoolsFx.Add(Item.Key, Item.Value);
+        }
+        foreach (CandyPrefabs Item in WrappedCandyListFx)
+        {
+            WrappedCandyPoolsFx.Add(Item.Key, Item.Value);
         }
     }
 }

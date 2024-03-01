@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts.MatchEnums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,10 @@ namespace Assets.Scripts.Game.Tiles
             Tiles.Add(Board.GetTile(x + 1, y + 1));
             return Tiles;
         }
+        public override void ExplodeFx()
+        {
+            this.Board.TilePool.GetWrappedCandyFx(Type).gameObject.transform.position = this.gameObject.transform.position;
+        }
     }
+    
 }

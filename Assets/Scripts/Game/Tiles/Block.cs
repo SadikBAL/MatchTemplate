@@ -12,6 +12,11 @@ public class Block : Tile
         return new List<GameObject> {};
     }
 
+    public override void ExplodeFx()
+    {
+        
+    }
+
     public override bool Moveable()
     {
         return false;

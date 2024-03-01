@@ -35,5 +35,9 @@ namespace Assets.Scripts.Game.Tiles
             }
             return Tiles;
         }
+        public override void ExplodeFx()
+        {
+            this.Board.TilePool.GetStripeCandyFx(Type,StripeType).gameObject.transform.position = this.gameObject.transform.position;
+        }
     }
 }

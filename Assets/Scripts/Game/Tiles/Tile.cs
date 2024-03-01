@@ -9,6 +9,7 @@ public abstract class Tile : MonoBehaviour
     [HideInInspector] public int y;
     [HideInInspector] public bool Destroyed = false;
     public abstract List<GameObject> Explode();
+    public abstract void ExplodeFx();
     public abstract bool Moveable();
 
     public void SetGameBoard(GameBoard Board)

@@ -14,6 +14,11 @@ namespace Assets.Scripts.Game.Tiles
             return new List<GameObject>() { gameObject };
         }
 
+        public override void ExplodeFx()
+        {
+            this.Board.TilePool.GetColorBombFx().gameObject.transform.position = this.gameObject.transform.position;
+        }
+
         public override bool Moveable()
         {
             return true;
